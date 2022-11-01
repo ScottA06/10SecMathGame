@@ -4,10 +4,24 @@ body {
     background-size: 100%;
 }
 
-h1 {
-    color: whitesmoke;
+.container {
+    /* color: whitesmoke; */
+    /* display: flex;*/
+    justify-content: center;
+    border: 2px solid #14213d;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 15px;
+    gap: 10px;
+    background-color: white;
+    color: black;
+    opacity: 0.6;
 }
 
-h2 {
-    color: whitesmoke;
+.text {
+    font-size: xx-large;
+    text-align: center;
+    gap: 25px;
+    padding: 50px;
 }
