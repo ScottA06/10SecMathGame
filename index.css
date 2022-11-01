@@ -1,0 +1,13 @@
+body {
+    background-image: url(./background.jpg);
+    background-position: no-repeat fixed 0 -300px;
+    background-size: 100%;
+}
+
+h1 {
+    color: whitesmoke;
+}
+
+h2 {
+    color: whitesmoke;
+}
