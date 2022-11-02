@@ -38,13 +38,57 @@ $(document).ready(function () {
     var randomNumberGenerator = function (size) {
         return Math.ceil(Math.random() * size);
     }
+    //Operators
+    function selectedOperator() {
+        var operators = [" + ", " - ", " % ", " x ", " + "]
+        let randomOperator = operators[Math.ceil(Math.random() * operators.length)]
+        return randomOperator
+    }
     // Question Generator
     var questionGenerator = function () {
         var question = {};
+        var operator = selectedOperator();
         var num1 = randomNumberGenerator(10);
         var num2 = randomNumberGenerator(10);
-        question.answer = num1 + num2;
-        question.equation = String(num1) + " + " + String(num2);
+        if ($('#add').prop('checked')) {
+            question.equation = String(num1) + " + " + String(num2);
+            question.answer = num1 + num2;
+        }
+        if ($('#subtract').prop('checked')) {
+            question.equation = String(num1) + " - " + String(num2);
+            question.answer = num1 - num2;
+        }
+        if ($('#multiply').prop('checked')) {
+            question.equation = String(num1) + " x " + String(num2);
+            question.answer = num1 * num2;
+        }
+        if ($('#divide').prop('checked')) {
+            question.equation = String(num1) + " / " + String(num2);
+            question.answer = num1 % num2;
+        }
+        // if (operator == " + ") {
+        //     question.answer = num1 + num2;
+        //     question.equation = num1 + " + " + num2
+        // }
+        // if (operator == " - ") {
+        //     question.answer = num1 - num2;
+        //     question.equation = num1 + " - " + num2
+        // }
+        // if (operator == " x ") {
+        //     question.answer = num1 * num2;
+        //     question.equation = num1 + " x " + num2
+        // }
+        // if (operator == " % ") {
+        //     question.answer = num1 % num2;
+        //     question.equation = num1 + " % " + num2
+        // }
+        // if (operator == undefined) {
+        //     question.answer = num1 + num2;
+        //     question.equation = num1 + " + " + num2
+        // }
+        console.log(operator)
+        // question.answer = num1 + operator + num2;
+        // question.equation = String(num1) + operator + String(num2);
         return question;
     }
     console.log(questionGenerator());
