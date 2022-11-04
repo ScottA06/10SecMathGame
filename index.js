@@ -50,22 +50,29 @@ $(document).ready(function () {
         var operator = selectedOperator();
         var num1 = randomNumberGenerator(10);
         var num2 = randomNumberGenerator(10);
+        var num3 = num1 * num2;
         if ($('#add').prop('checked')) {
             question.equation = String(num1) + " + " + String(num2);
             question.answer = num1 + num2;
         }
         if ($('#subtract').prop('checked')) {
-            question.equation = String(num1) + " - " + String(num2);
-            question.answer = num1 - num2;
+            if (num1 > num2) {
+                question.equation = String(num1) + " - " + String(num2);
+                question.answer = num1 - num2;
+            } else if (num1 < num2) {
+                question.equation = String(num2) + " - " + String(num1);
+                question.answer = num2 - num1;
+            }
         }
         if ($('#multiply').prop('checked')) {
             question.equation = String(num1) + " x " + String(num2);
             question.answer = num1 * num2;
         }
         if ($('#divide').prop('checked')) {
-            question.equation = String(num1) + " / " + String(num2);
-            question.answer = num1 % num2;
+            question.equation = String(num3) + " / " + String(num2);
+            question.answer = num3 % num2;
         }
+
         // if (operator == " + ") {
         //     question.answer = num1 + num2;
         //     question.equation = num1 + " + " + num2
