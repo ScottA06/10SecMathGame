@@ -70,9 +70,11 @@ $(document).ready(function () {
         }
         if ($('#divide').prop('checked')) {
             question.equation = String(num3) + " / " + String(num2);
-            question.answer = num3 % num2;
+            question.answer = num1;
         }
-
+        $('.checked').click(function () {
+            $('.checked').not(this).prop('checked', false);
+        });
         // if (operator == " + ") {
         //     question.answer = num1 + num2;
         //     question.equation = num1 + " + " + num2
