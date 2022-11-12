@@ -7,7 +7,18 @@ $(document).ready(function () {
 
     var timeLeft = 10;
 
+    var highScore = 0;
+
     var score = 0;
+
+    // var range = $(('#numRange').val());
+
+    // $('numRangeLabel').html($('numRange').val())
+
+    // $('numRangeLabel').on('input', function () {
+    //     $('numRange').html($('numRangeLabel').val())
+    // })
+
     //timer update
     var updateTimeLeft = function (amount) {
         timeLeft += amount;
@@ -31,6 +42,8 @@ $(document).ready(function () {
                     clearInterval(interval);
                     interval = undefined;
                 }
+                if (score > highScore) highScore = score;
+                $('#highScore').text(highScore);
             }, 1000);
         }
     }
@@ -39,17 +52,25 @@ $(document).ready(function () {
         return Math.ceil(Math.random() * size);
     }
     //Operators
-    function selectedOperator() {
-        var operators = [" + ", " - ", " % ", " x ", " + "]
-        let randomOperator = operators[Math.ceil(Math.random() * operators.length)]
-        return randomOperator
-    }
+    // function selectedOperator() {
+    //     var operators = [" + ", " - ", " % ", " x ", " + "]
+    //     let randomOperator = operators[Math.ceil(Math.random() * operators.length)]
+    //     return randomOperator
+    // }
     // Question Generator
     var questionGenerator = function () {
+
+        let rangeSlider = document.getElementById("numRange");
+        let output = document.getElementById("numRangeLabel");
+        output.innerHTML = rangeSlider.value;
+        rangeSlider.oninput = function () {
+            output.innerHTML = this.value;
+        }
+
         var question = {};
-        var operator = selectedOperator();
-        var num1 = randomNumberGenerator(10);
-        var num2 = randomNumberGenerator(10);
+        // var operator = selectedOperator();
+        var num1 = randomNumberGenerator(rangeSlider.value);
+        var num2 = randomNumberGenerator(rangeSlider.value);
         var num3 = num1 * num2;
         if ($('#add').prop('checked')) {
             question.equation = String(num1) + " + " + String(num2);
@@ -59,9 +80,11 @@ $(document).ready(function () {
             if (num1 > num2) {
                 question.equation = String(num1) + " - " + String(num2);
                 question.answer = num1 - num2;
-            } else if (num1 < num2) {
+            } else if (num1 <= num2) {
                 question.equation = String(num2) + " - " + String(num1);
                 question.answer = num2 - num1;
+                console.log(question.equation);
+                console.log(question.answer);
             }
         }
         if ($('#multiply').prop('checked')) {
@@ -75,6 +98,9 @@ $(document).ready(function () {
         $('.checked').click(function () {
             $('.checked').not(this).prop('checked', false);
         });
+        // console.log(question)
+        // console.log(selectedOperator)
+        // console.log(question.answer);
         // if (operator == " + ") {
         //     question.answer = num1 + num2;
         //     question.equation = num1 + " + " + num2
@@ -95,7 +121,7 @@ $(document).ready(function () {
         //     question.answer = num1 + num2;
         //     question.equation = num1 + " + " + num2
         // }
-        console.log(operator)
+        // console.log(operator)
         // question.answer = num1 + operator + num2;
         // question.equation = String(num1) + operator + String(num2);
         return question;
